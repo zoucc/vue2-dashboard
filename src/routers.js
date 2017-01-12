@@ -5,7 +5,23 @@ import 'nprogress/nprogress.css';
 
 Vue.use(Router);
 
+// view components
+import App from './views/App';
+import test from './views/test';
+
 const routes = [
+  {
+    path: '/',
+    name: 'app',
+    component: App,
+    children: [
+      {
+        path: '/user',
+        component: test,
+        name: 'test'
+      }
+    ]
+  }
 ];
 
 const router = new Router({
