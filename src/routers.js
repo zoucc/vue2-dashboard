@@ -6,7 +6,7 @@ import 'nprogress/nprogress.css';
 Vue.use(Router);
 
 // view components
-import App from './views/App';
+import App from './views/Appv2';
 import test from './views/test';
 
 const routes = [
