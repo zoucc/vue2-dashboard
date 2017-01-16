@@ -21,7 +21,6 @@
 </template>
 
 <script>
-import Hello from '../components/Hello';
 import Header from '../components/layout2/Header';
 import Content from '../components/layout2/Content';
 import Main from '../components/layout2/Main';
@@ -48,8 +47,8 @@ export default {
 
 <style lang="less">
   @top-height: 50px;
-  @sider-width: 224px;
-  @sider-collapse-width: 64px;
+  @sider-width: 180px;
+  @sider-collapse-width: 50px;
   @transition: all 0.3s ease;
   @black: #2a323c;
 
@@ -86,9 +85,13 @@ export default {
           .el-submenu__icon-arrow,
           .nav-next {
             display: none;
+            padding-left: 10px;
           }
           &-item {
             padding: 0 !important;
+          }
+          .el-menu-item{
+            text-align: center;
           }
           .el-submenu {
             text-align: center;

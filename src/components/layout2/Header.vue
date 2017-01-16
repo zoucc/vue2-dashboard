@@ -52,9 +52,9 @@ export default {
   @t-black: #373d41;;
   @blue: #03a9f4;
   @gray: #d3dce6;
-  @sider-width: 224px;
+  @sider-width: 180px;
   @top-height: 50px;
-  @sider-collapse-width: 64px;
+  @sider-collapse-width: 50px;
   @transition: all 0.3s ease;
 
   .layout {

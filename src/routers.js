@@ -8,17 +8,36 @@ Vue.use(Router);
 // view components
 import App from './views/Appv2';
 import test from './views/test';
+import User from './views/User';
+import Error from './views/Error';
 
 const routes = [
   {
     path: '/',
-    name: 'app',
+    name: '',
+    component: App,
+    children: [
+      {
+        path: '/dashboard',
+        component: test,
+        name: '首页'
+      },
+    ]
+  },
+  {
+    path: '/',
+    name: '演示',
     component: App,
     children: [
       {
         path: '/user',
-        component: test,
-        name: 'test'
+        component: User,
+        name: '用户管理',
+      },
+      {
+        path: '*',
+        component: Error,
+        name: 'not found'
       }
     ]
   }

@@ -4,7 +4,8 @@
         <div class="layout-breadcrumb">
           <el-breadcrumb separator="/">
             <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-            <el-breadcrumb-item>活动详情</el-breadcrumb-item>
+            <el-breadcrumb-item >{{currentRouteParent}}</el-breadcrumb-item>
+            <el-breadcrumb-item v-if="currentRoute!='' && currentRoute!='首页'">{{currentRoute}}</el-breadcrumb-item>
           </el-breadcrumb>
         </div>
         <div class="layout-inner">
@@ -15,9 +16,29 @@
 </template>
 
 <script>
-  export default {
-    name: 'main'
-  }
+import { mapGetters } from 'vuex';
+
+export default {
+  name: 'main',
+  computed: {
+    ...mapGetters({
+      menus: 'menuList',
+    })
+  },
+  data() {
+    return {
+      /*currentRoute: this.$router.history.current.fullPath,*/
+      currentRoute: this.$router.history.current.name,
+      currentRouteParent: this.$router.history.current.matched[0].name,
+    }
+  },
+  watch: {
+		'$route' (to, from) {//监听路由改变
+			this.currentRoute=to.name;
+			this.currentRouteParent=to.matched[0].name;
+		}
+	},
+}
 </script>
 
 <style lang="less">
@@ -51,7 +72,8 @@
     box-shadow: 0 1px 2px 0 rgba(0,0,0,.1);
     padding: 25px 15px;
     background-color: #fff;
-    margin: -15px -15px 0 -15px;
+    height: 0;
+    margin: -24px -15px 0 -15px;
   }
 }
 </style>

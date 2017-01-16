@@ -10,28 +10,34 @@
         :unique-opened="true"
         :default-active="currentRoute"
         :router="true">
-        <el-submenu
-          :index="menu.name"
-          v-for="(menu, index) in menus">
-          <template slot="title">
+
+        <template v-for="(menu, index) in menus">
+          <el-menu-item v-if="menu.leaf" :index="menu.path">
             <i v-if="menu.icon" class="fa" :class="'fa-' + menu.icon"></i>
             <span class="nav-next">{{menu.text}}</span>
-          </template>
-          <el-menu-item
-            :index="subMenu.path"
-            v-for="(subMenu, subIndex) in menu.children">
-            <i v-if="subMenu.icon" class="fa" :class="'fa-' + subMenu.icon"></i>
-            <span class="nav-next">{{subMenu.text}}</span>
           </el-menu-item>
-        </el-submenu>
+
+          <el-submenu v-if="!menu.leaf"
+            :index="menu.name">
+            <template slot="title">
+              <i v-if="menu.icon" class="fa" :class="'fa-' + menu.icon"></i>
+              <span class="nav-next">{{menu.text}}</span>
+            </template>
+            <el-menu-item
+              :index="subMenu.path"
+              v-for="(subMenu, subIndex) in menu.children">
+              <i v-if="subMenu.icon" class="fa" :class="'fa-' + subMenu.icon"></i>
+              <span class="nav-next">{{subMenu.text}}</span>
+            </el-menu-item>
+          </el-submenu>
+        </template>
+
       </el-menu>
     </div>
-
   </div>
 </template>
 
 <script>
-import menus from '../../nav-config';
 import { mapGetters } from 'vuex';
 
 export default {
@@ -39,12 +45,12 @@ export default {
   computed: {
     ...mapGetters({
       isCollapse: 'getLeftNavState',
+      menus: 'menuList'
     })
   },
   data() {
     return {
       currentRoute: this.$router.history.current.fullPath,
-      menus,
     }
   }
 }
@@ -52,8 +58,8 @@ export default {
 
 <style lang="less">
 @top-height: 50px;
-@sider-width: 224px;
-@sider-collapse-width: 64px;
+@sider-width: 180px;
+@sider-collapse-width: 50px;
 @transition: all 0.3s ease;
 @sider-width: 224px;
 @black: #2a323c;
@@ -87,6 +93,27 @@ export default {
     position: absolute;
     top: 50px;
     width: 100%;
+    .el-menu--dark {
+      background-color: #42485b;
+    }
+    .nav-next {
+      padding-left: 10px;
+    }
+    .el-menu--horizontal.el-menu--dark .el-submenu .el-menu-item.is-active, .el-menu-item.is-active {
+      background: #00C1DE;
+      color: #fff;
+    }
+    .el-menu--dark .el-menu-item:hover, .el-menu--dark .el-submenu__title:hover {
+      background-color: #00C1DE;
+    }
+    .el-menu--dark .el-menu-item, .el-menu--dark .el-submenu__title {
+      color: #fff;
+    }
+    .el-menu-item, .el-submenu__title {
+      height: 40px;
+      line-height: 40px;
+      font-size: 12px;
+    }
   }
 }
 </style>
