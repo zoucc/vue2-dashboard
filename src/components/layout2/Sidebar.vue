@@ -52,7 +52,12 @@ export default {
     return {
       currentRoute: this.$router.history.current.fullPath,
     }
-  }
+  },
+  watch: {
+		'$route' (to, from) {//监听路由改变
+			this.currentRoute=to.name;
+		}
+	},
 }
 </script>
 

@@ -14,6 +14,11 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-default/index.css'
 Vue.use(ElementUI);
 
+// ajax axios 请求
+import axios from 'axios'
+import VueAxios from 'vue-axios'
+Vue.use(VueAxios, axios);
+
 const app = new Vue({
   router,
   ...App,
